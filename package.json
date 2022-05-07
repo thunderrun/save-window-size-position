@@ -1,7 +1,7 @@
 {
   "name": "save-window-size-position",
   "version": "1.0.0",
-  "description": "copy table data to clipboard",
+  "description": "save and restore window size and position",
   "main": "index.js",
   "scripts": {
     "test": "npx http-server"

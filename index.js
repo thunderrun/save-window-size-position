@@ -1,48 +1,77 @@
-export default (tableData, headers) => {
-  let string = '';
+const saveWindowStateBeforeUnload = () => {
 
-  if (headers) {
-    headers.forEach((header) => {
-      string += `${header}\t`;
-    });
-    string += "\n";
+  window.onbeforeunload = function (evt) {
+
+    const lastWindowState = {
+      outerHeight: window.outerHeight,
+      outerWidth: window.outerWidth,
+      innerWidth: window.innerWidth,
+      innerHeight: window.innerHeight,
+      screenX: window.screenX,
+      screenY: window.screenY,
+    }
+
+    localStorage.setItem('lastWindowState', JSON.stringify(lastWindowState));
+
+    return null;
+  };
+};
+
+const restoreWindowState = (defaultOuterWidth, defaultOuterHeight, defaultScreenX, defaultScreenY) => {
+
+  // resize and reposition window
+  let lastWindowState = JSON.parse(localStorage.getItem('lastWindowState'))
+
+  if (lastWindowState === null) {
+    if (defaultOuterWidth || defaultOuterHeight || defaultScreenX || defaultScreenY) {
+      lastWindowState = {}
+    } else {
+      return;
+    }
   }
 
-  if (tableData && tableData[0]) {
+  const outerHeight = lastWindowState.outerHeight || defaultOuterHeight;
+  const outerWidth = lastWindowState.outerWidth || defaultOuterWidth;
+  const screenX = lastWindowState.screenX || defaultScreenX;
+  const screenY = lastWindowState.screenY || defaultScreenY;
 
-    let data = [];
+  window.resizeTo(
+    outerWidth,
+    outerHeight,
+  );
 
-    if (Array.isArray(tableData[0])) {
-      data = tableData;
-    } else if (typeof tableData[0] === 'object') {
-      tableData.forEach((obj, index) => {
-        data[index] = Object.values(obj);
-      });
-    } 
+  window.moveTo(screenX, screenY);
 
-    data.forEach((row) => {
-      row.forEach((cell) => {
-        let newCell = cell;
+};
 
-        if (typeof newCell === 'string') {
-          if (newCell.includes('\t')) {
-            newCell = cell.replaceAll('\t', '');
-          }
-          if (newCell.includes('\n')) {
-            newCell = cell.replaceAll('\n', '');
-          }
-        }
+const getSavedWindowState = (defaultInnerWidth, defaultInnerHeight, defaultScreenX, defaultScreenY) => {
 
-        string += `${newCell}\t`;
-      });
-      string += "\n";
-    });
+  const lastWindowState = JSON.parse(localStorage.getItem('lastWindowState'));
+
+  if (!lastWindowState) {
+    let windowFeatures = '';
+    if (defaultInnerWidth) {
+      windowFeatures += `innerWidth=${defaultInnerWidth},`
+    }
+    if (defaultInnerHeight) {
+      windowFeatures += `innerHeight=${defaultInnerHeight},`
+    }
+    if (defaultScreenX) {
+      windowFeatures += `screenX=${defaultScreenX},`
+    }
+    if (defaultScreenY) {
+      windowFeatures += `screenY=${defaultScreenY},`
+    }
+    return windowFeatures;
   }
 
-  navigator.clipboard.writeText(string).catch((error) => {
-    console.log(error);
-  });
+  const innerHeight = lastWindowState.innerHeight;
+  const innerWidth = lastWindowState.innerWidth;
+  const screenX = lastWindowState.screenX;
+  const screenY = lastWindowState.screenY;
 
-  return string;
+  return `screenX=${screenX},screenY=${screenY},innerWidth=${innerWidth},innerHeight=${innerHeight},`;
 
-}
+};
+
+export { saveWindowStateBeforeUnload, getSavedWindowState, restoreWindowState };
