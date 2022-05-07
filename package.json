@@ -1,0 +1,19 @@
+{
+  "name": "save-window-size-position",
+  "version": "1.0.0",
+  "description": "copy table data to clipboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thunderrun/ave-window-size-position.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thunderrun/ave-window-size-position/issues"
+  },
+  "homepage": "https://github.com/thunderrun/ave-window-size-position#readme"
+}
