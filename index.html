@@ -13,8 +13,9 @@
   <script type="module">
     import { getSavedWindowState } from './index.js';
 
-    window.open('./test.html', undefined, `${getSavedWindowState(800, 600, 0, 0)}`);
+    // window.open('./test.html', undefined, `${getSavedWindowState(800, 600, 0, 0)}`);
     // window.open('./test.html', undefined, `popup=1,${getSavedWindowState()}`);
+    window.open('./test.html', undefined, `popup=1`);
 
   </script>
 
