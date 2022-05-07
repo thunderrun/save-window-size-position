@@ -9,8 +9,46 @@ npm i 'save-window-size-position'
 ```
 
 ```js
+// window.html
 import { saveWindowStateBeforeUnload, restoreWindowState } from 'save-window-size-position'
 
 restoreWindowState();
 saveWindowStateBeforeUnload();
 ```
+
+or
+
+```js
+// parent.html
+import { getSavedWindowState } from 'save-window-size-position';
+
+window.open('./test.html', undefined, `popup=1,${getSavedWindowState()}`);
+// width and height are inaccurate but won't resize the window on open
+```
+
+```js
+// window.html
+import { saveWindowStateBeforeUnload } from 'save-window-size-position'
+
+// restoreWindowState(); // resize to make the window size accurate
+saveWindowStateBeforeUnload();
+```
+
+### Parameters
+
+```js
+restoreWindowState(
+  defaultOuterWidth, 
+  defaultOuterHeight, 
+  defaultScreenX, 
+  defaultScreenY,
+);
+
+getSavedWindowState(
+  defaultInnerWidth, 
+  defaultInnerHeight, 
+  defaultScreenX, 
+  defaultScreenY,
+);
+```
+

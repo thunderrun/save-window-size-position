@@ -1,6 +1,6 @@
 const saveWindowStateBeforeUnload = () => {
 
-  window.onbeforeunload = function (evt) {
+  window.onbeforeunload = function () {
 
     const lastWindowState = {
       outerHeight: window.outerHeight,
