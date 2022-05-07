@@ -23,7 +23,7 @@ or
 import { getSavedWindowState } from 'save-window-size-position';
 
 window.open('./test.html', undefined, `popup=1,${getSavedWindowState()}`);
-// width and height are inaccurate but won't resize the window on open
+// won't resize the window on open, but width and height are inaccurate (not only if the user zoomed)
 ```
 
 ```js
