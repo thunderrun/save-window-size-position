@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/thunderrun/ave-window-size-position.git"
+    "url": "git+ssh://git@github.com/thunderrun/save-window-size-position.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thunderrun/ave-window-size-position/issues"
+    "url": "https://github.com/thunderrun/save-window-size-position/issues"
   },
-  "homepage": "https://github.com/thunderrun/ave-window-size-position#readme"
+  "homepage": "https://github.com/thunderrun/save-window-size-position#readme"
 }
